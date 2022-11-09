@@ -7,7 +7,7 @@ window.onload= function()
     {
         
         httpReq= new XMLHttpRequest();
-        let url ="http://localhost/comp2245-assignment4/superheroes.php?query="+searchAct.value+"";
+        let url ="http://localhost/comp2245-assignment4/superheroes.php"+searchAct.value+"";
         httpReq.open('GET',url);
         httpReq.send();
         httpReq.onreadystatechange= reply;
