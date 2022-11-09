@@ -9,7 +9,8 @@
         btn.addEventListener('click', search);
       
       
-        function search(){
+        function search()
+        {
           let data = textfield.value;
           let ext = '?q='+data;
           httpRequest.onreadystatechange = requestaction;
@@ -17,14 +18,19 @@
           httpRequest.send();
         }
         
-        function requestaction(){
-          if(httpRequest.readyState === XMLHttpRequest.DONE){
-            if(httpRequest.status === 200){
+        function requestaction()
+        {
+          if(httpRequest.readyState === XMLHttpRequest.DONE)
+          {
+            if(httpRequest.status === 200)
+            {
       
                 let response = httpRequest.responseText;
                 result.innerHTML = response;
       
-              }else{
+              }
+              else
+              {
       
                 alert('There is a problem with the request');
       
