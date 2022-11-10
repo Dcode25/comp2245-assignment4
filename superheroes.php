@@ -62,3 +62,41 @@ $superheroes = [
       "biography" => "Notably powerful, Wanda Maximoff has fought both against and with the Avengers, attempting to hone her abilities and do what she believes is right to help the world.",
   ], 
 ];
+
+
+if($_SERVER['REQUEST_METHOD'] == 'GET'){
+
+    $userInput = filter_input(INPUT_GET, 'query', FILTER_SANITIZE_STRING);
+    
+    if(empty($userInput)){
+        echo "<h1 style=color:blue>The Hero's</h1>";
+        echo "<hr>";
+        echo "<ul>";
+        foreach ($superheroes as $superhero){
+            echo "<li>".$superhero['alias']."</li>";
+        }    
+        echo "</ul>";
+    }
+
+    else{
+        $query = true;
+        foreach ($superheroes as $superhero){
+            if($superhero['name'] == $userInput || $superhero['alias'] == $userInput){
+                $query = false;
+                echo "<h1 style=color:Green>Results</h1>";
+                echo "<hr>";
+                echo "<h3 class=\"heroalias\">".$superhero['alias']."</h3>";
+                echo "<h4 class=\"heroname\">".$superhero['name']."</h4>";
+                echo "<p class=\"bio\">".$superhero['biography']."</p>";
+                break;
+            }
+        }
+        if($query = false){
+            echo "<h1>Result</h1>";
+            echo "<hr>";
+            echo "<h4 class=\"notfound\" style=color: Read>Superhero not found</h4>";
+        }
+        
+    }
+}
+ ?>
