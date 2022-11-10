@@ -62,41 +62,61 @@ $superheroes = [
       "biography" => "Notably powerful, Wanda Maximoff has fought both against and with the Avengers, attempting to hone her abilities and do what she believes is right to help the world.",
   ], 
 ];
+?>
+<?php
 
+function sanitization($data)
+{
+    $data = htmlspecialchars($data);
+    $data = stripslashes($data);
+    $data = trim($data);
+    return $data;
+}
 
-if($_SERVER['REQUEST_METHOD'] == 'GET'){
+if($_SERVER['REQUEST_METHOD'] == 'GET')
+{
 
-    $userInput = filter_input(INPUT_GET, 'query', FILTER_SANITIZE_STRING);
-    
-    if(empty($userInput)){
+    $UserInput = isset($_GET["HeroSearch"] ) ? $_GET["HeroSearch"]: '';
+    $searchQuery = sanitization($UserInput);
+
+    if(empty($searchQuery))
+{
         echo "<h1 style=color:blue>The Hero's</h1>";
         echo "<hr>";
         echo "<ul>";
         foreach ($superheroes as $superhero){
-            echo "<li>".$superhero['alias']."</li>";
-        }    
+            echo "<li>" . $superhero['name'] . "</li>";
+        }
         echo "</ul>";
     }
 
-    else{
-        $query = true;
-        foreach ($superheroes as $superhero){
-            if($superhero['name'] == $userInput || $superhero['alias'] == $userInput){
-                $query = false;
-                echo "<h1 style=color:Green>Results</h1>";
+    else
+{
+        $found = false;
+        foreach ($superheroes as $superhero)
+{
+            if( ($superhero['name'] == $searchQuery) || ($superhero['alias'] == $searchQuery) )
+{
+                $found = true;
+		    echo "<div id = 'result'>";
+                echo "<h1>RESULT</h1>";
                 echo "<hr>";
-                echo "<h3 class=\"heroalias\">".$superhero['alias']."</h3>";
-                echo "<h4 class=\"heroname\">".$superhero['name']."</h4>";
-                echo "<p class=\"bio\">".$superhero['biography']."</p>";
+                echo "<h3>" . $superhero['alias'] . "</h3>";
+                echo "<h4> A.K.A. " . $superhero['name'] . "</h4>";
+                echo "<p>" . $superhero['biography'] . "</p>";
                 break;
+		    echo "</div>";
             }
         }
-        if($query = false){
-            echo "<h1>Result</h1>";
+        if($found == false)
+{
+		echo "<div id = \result\>";
+            echo "<h1>RESULT</h1>";
             echo "<hr>";
-            echo "<h4 class=\"notfound\" style=color: Read>Superhero not found</h4>";
-        }
+            echo "<h4 style= 'font-size:25px; color: red; background-color : black;'>Sorry! Superhero not found</h4>";
+		echo "</div>";
         
-    }
+
+    }}
 }
  ?>
