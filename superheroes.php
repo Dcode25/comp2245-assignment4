@@ -62,18 +62,3 @@ $superheroes = [
       "biography" => "Notably powerful, Wanda Maximoff has fought both against and with the Avengers, attempting to hone her abilities and do what she believes is right to help the world.",
   ], 
 ];
-function searchArray($x, $array) {
-    foreach ($array as $hero => $value) {
-        if(($value['name'] == $x) or ($value['alias'] == $x)) {
-            return json_encode($value);
-        }
-    }
-}
-$command = $_GET['query'];
-if (empty($command)) {
-    echo json_encode($superheroes);
-} else {
-    $result = searchArray($command, $superheroes);
-    echo $result;
-}
-?>
