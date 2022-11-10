@@ -60,14 +60,3 @@ button
     border: none;
     text-indent: 15px;
 }
-
-.input
-{
-    height: 50px;
-    width: 300px;
-    border-radius: 10px;
-    border: none;
-    text-indent: 15px;
-    border: #FFFFFF 1px solid;
-
-}

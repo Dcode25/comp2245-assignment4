@@ -8,11 +8,10 @@
       
         btn.addEventListener('click', search);
       
-      
         function search()
         {
           let data = textfield.value;
-          let ext = '?q='+data;
+          let ext = '?query='+data;
           httpRequest.onreadystatechange = requestaction;
           httpRequest.open('GET', url+ext, true);
           httpRequest.send();
